@@ -1,0 +1,14 @@
+# Never commit private benchmark inputs.
+private/
+_private/
+*.private.json
+*.secret.json
+benchmark-full.json
+private-benchmark.json
+
+# Local/generated clutter
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+.idea/

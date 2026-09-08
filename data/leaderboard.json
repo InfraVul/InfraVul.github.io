@@ -1,0 +1,56 @@
+[
+  {
+    "model": "OpenAI GPT",
+    "organization": "OpenAI",
+    "exact_match": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "status": "Coming soon"
+  },
+  {
+    "model": "Claude",
+    "organization": "Anthropic",
+    "exact_match": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "status": "Coming soon"
+  },
+  {
+    "model": "Gemini",
+    "organization": "Google",
+    "exact_match": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "status": "Coming soon"
+  },
+  {
+    "model": "Qwen",
+    "organization": "Alibaba",
+    "exact_match": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "status": "Coming soon"
+  },
+  {
+    "model": "Kimi",
+    "organization": "Moonshot AI",
+    "exact_match": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "status": "Coming soon"
+  },
+  {
+    "model": "GLM",
+    "organization": "Zhipu AI",
+    "exact_match": null,
+    "precision": null,
+    "recall": null,
+    "f1": null,
+    "status": "Coming soon"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "version": "Agent-CWE public aggregate statistics",
+  "status_text": "This public site reports aggregate benchmark statistics only. Private benchmark samples, repositories, commits, file paths, source code, and internal audit traces are not included.",
+  "sample_count": 316,
+  "gold_function_count": 466,
+  "language_count": 7,
+  "curator_model_count": 3,
+  "language_distribution": [
+    {"language": "Python", "samples": 148, "functions": 225},
+    {"language": "Go", "samples": 103, "functions": 143},
+    {"language": "Java", "samples": 46, "functions": 70},
+    {"language": "TypeScript", "samples": 12, "functions": 20},
+    {"language": "JavaScript", "samples": 5, "functions": 6},
+    {"language": "C++", "samples": 1, "functions": 1},
+    {"language": "Vue", "samples": 1, "functions": 1}
+  ],
+  "consensus": [
+    {"label": "GLM-5.2 × Kimi-K2.6 exact consensus", "samples": 338, "functions": 510},
+    {"label": "Kimi-K2.6 × Qwen3.8-Flash-Next exact consensus", "samples": 346, "functions": 521},
+    {"label": "Three-model exact consensus", "samples": 316, "functions": 466}
+  ]
+}

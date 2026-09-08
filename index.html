@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Agent-CWE: a repository-level benchmark for vulnerability function localization with code agents." />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Agent-CWE Benchmark</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="Agent-CWE home">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">InfraVul</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav id="navMenu" class="nav-menu">
+        <a href="#overview">Overview</a>
+        <a href="#statistics">Statistics</a>
+        <a href="#construction">Construction</a>
+        <a href="#leaderboard">Leaderboard</a>
+        <a href="#explorer">Explorer</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-orb hero-orb-a"></div>
+      <div class="hero-orb hero-orb-b"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Repository-Level Security Benchmark</div>
+          <h1>Agent-CWE</h1>
+          <p class="hero-subtitle">
+            A benchmark for evaluating whether code agents can localize security-relevant functions in real repositories.
+          </p>
+          <p class="hero-note">
+            This public site intentionally contains only aggregate statistics and public-safe metadata. The private benchmark data is not published here.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#leaderboard">View Leaderboard</a>
+            <a class="btn btn-secondary" href="#statistics">Benchmark Statistics</a>
+            <a class="btn btn-ghost disabled" id="paperButton" href="#" aria-disabled="true">Paper · Coming soon</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-label">Benchmark at a glance</div>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-value" id="metricSamples">—</div>
+              <div class="metric-label">Samples</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metricFunctions">—</div>
+              <div class="metric-label">Gold Functions</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metricLanguages">—</div>
+              <div class="metric-label">Languages</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value" id="metricModels">—</div>
+              <div class="metric-label">Curator Models</div>
+            </div>
+          </div>
+          <div class="hero-status" id="dataStatus">Loading public statistics…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Overview</div>
+          <h2>What does Agent-CWE measure?</h2>
+          <p>
+            Agent-CWE focuses on repository-level vulnerability function localization. A model must reason over repository context and identify the functions that are causally relevant to a security issue, rather than merely returning every function changed by a patch.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-index">01</div>
+            <h3>Repository-level context</h3>
+            <p>Evaluation is designed around realistic repository evidence instead of isolated code snippets.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-index">02</div>
+            <h3>Function-level gold</h3>
+            <p>The target is a precise set of security-relevant functions, suitable for exact-match and retrieval-style evaluation.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-index">03</div>
+            <h3>Independent curation</h3>
+            <p>Multiple independent curation signals can be combined using strict consensus to improve precision.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-index">04</div>
+            <h3>Agent-oriented protocol</h3>
+            <p>The benchmark is intended for code agents that can inspect files, trace calls, and reason over project structure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="statistics">
+      <div class="container">
+        <div class="section-heading row-between">
+          <div>
+            <div class="eyebrow">Statistics</div>
+            <h2>Benchmark distribution</h2>
+            <p>Only aggregate statistics are loaded by this public page.</p>
+          </div>
+          <div class="badge" id="statsVersion">Public-safe stats</div>
+        </div>
+
+        <div class="stats-layout">
+          <div class="panel chart-panel">
+            <div class="panel-header">
+              <div>
+                <h3>Sample distribution by language</h3>
+                <p>Number of benchmark samples per programming language.</p>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="sampleLanguageChart" aria-label="Sample language distribution"></canvas>
+              <div class="empty-state hidden" id="sampleChartEmpty">No public statistics have been released yet.</div>
+            </div>
+          </div>
+
+          <div class="panel chart-panel">
+            <div class="panel-header">
+              <div>
+                <h3>Gold functions by language</h3>
+                <p>Number of gold vulnerable functions per programming language.</p>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="functionLanguageChart" aria-label="Function language distribution"></canvas>
+              <div class="empty-state hidden" id="functionChartEmpty">No public statistics have been released yet.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel table-panel">
+          <div class="panel-header">
+            <div>
+              <h3>Language table</h3>
+              <p>Aggregate values only; no repository paths or code are included.</p>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Language</th>
+                  <th>Samples</th>
+                  <th>Sample %</th>
+                  <th>Gold Functions</th>
+                  <th>Function %</th>
+                </tr>
+              </thead>
+              <tbody id="languageTableBody">
+                <tr><td colspan="5" class="table-empty">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="construction">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Construction</div>
+          <h2>High-confidence benchmark construction</h2>
+          <p>The public page describes the methodology at a high level without exposing private samples or source code.</p>
+        </div>
+
+        <div class="pipeline" role="list">
+          <div class="pipeline-step" role="listitem">
+            <div class="pipeline-number">1</div>
+            <h3>Security-fix commits</h3>
+            <p>Collect candidate security fixes and aligned parent/fix revisions.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="pipeline-number">2</div>
+            <h3>CWE annotation</h3>
+            <p>Associate candidate cases with manually reviewed vulnerability categories.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="pipeline-number">3</div>
+            <h3>Repository evidence</h3>
+            <p>Inspect relevant files, call chains, configuration, and security boundaries.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="pipeline-number">4</div>
+            <h3>Independent curation</h3>
+            <p>Obtain independent function-level judgments from multiple curator models.</p>
+          </div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="pipeline-number">5</div>
+            <h3>Exact consensus</h3>
+            <p>Keep cases where the complete function set satisfies the selected consensus rule.</p>
+          </div>
+        </div>
+
+        <div class="panel consensus-panel">
+          <div class="panel-header">
+            <div>
+              <h3>Consensus summary</h3>
+              <p>Public aggregate consensus statistics are shown below; no sample-level benchmark data is included.</p>
+            </div>
+          </div>
+          <div class="consensus-grid" id="consensusGrid">
+            <div class="empty-state">Consensus statistics are not public yet.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="leaderboard">
+      <div class="container">
+        <div class="section-heading row-between">
+          <div>
+            <div class="eyebrow">Leaderboard</div>
+            <h2>Code-agent evaluation results</h2>
+            <p>Model rows can be published before scores are available. Null scores render as “—”.</p>
+          </div>
+          <div class="badge badge-accent">Results coming soon</div>
+        </div>
+
+        <div class="panel table-panel">
+          <div class="table-scroll">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Model</th>
+                  <th>Organization</th>
+                  <th>Exact Match</th>
+                  <th>Precision</th>
+                  <th>Recall</th>
+                  <th>F1</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboardBody">
+                <tr><td colspan="8" class="table-empty">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="explorer">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Explorer</div>
+          <h2>Public benchmark explorer</h2>
+          <p>
+            No private benchmark samples are published on this site. The explorer will be enabled only if sanitized public metadata is released later.
+          </p>
+        </div>
+
+        <div class="explorer-controls">
+          <label class="search-box">
+            <span>Search</span>
+            <input id="sampleSearch" type="search" placeholder="Search public sample metadata…" autocomplete="off" />
+          </label>
+          <label>
+            <span>Language</span>
+            <select id="languageFilter"><option value="">All</option></select>
+          </label>
+          <label>
+            <span>CWE</span>
+            <select id="cweFilter"><option value="">All</option></select>
+          </label>
+        </div>
+
+        <div id="sampleGrid" class="sample-grid"></div>
+        <div id="sampleEmpty" class="empty-state explorer-empty">No public sample metadata has been released.</div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="release">
+      <div class="container release-grid">
+        <div>
+          <div class="eyebrow">Release</div>
+          <h2>Dataset and evaluation protocol</h2>
+          <p>
+            Keep private benchmark JSON outside this repository. Publish only the files that have passed your disclosure and licensing review.
+          </p>
+        </div>
+        <div class="release-actions">
+          <a class="btn btn-secondary disabled" href="#" aria-disabled="true">Dataset · Coming soon</a>
+          <a class="btn btn-secondary disabled" href="#" aria-disabled="true">Protocol · Coming soon</a>
+          <a class="btn btn-secondary" id="githubButton" href="#" target="_blank" rel="noreferrer">GitHub Repository</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Citation</div>
+          <h2>Cite Agent-CWE</h2>
+          <p>A formal citation will be updated when the paper or technical report is public.</p>
+        </div>
+        <div class="citation-box">
+          <button class="copy-button" id="copyCitation">Copy</button>
+          <pre id="citationText">@misc{agentcwe,
+  title        = {Agent-CWE: A Repository-Level Benchmark for Vulnerability Function Localization with Code Agents},
+  year         = {2026},
+  howpublished = {\url{https://InfraVul.github.io/}},
+  note         = {Benchmark website; formal paper citation forthcoming}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div><strong>InfraVul</strong> · Agent-CWE Benchmark</div>
+      <div id="footerVersion">Public site</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
